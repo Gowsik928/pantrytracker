@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_waste_insights">
+
+    <fragment
+        android:id="@+id/navigation_waste_insights"
+        android:name="com.example.freshnesstracker.WasteInsightsFragment"
+        android:label="Waste Insights"
+        tools:layout="@layout/fragment_waste_insights" />
+
+    <fragment
+        android:id="@+id/navigation_is_it_fresh"
+        android:name="com.example.freshnesstracker.IsItFreshFragment"
+        android:label="Is It Fresh?"
+        tools:layout="@layout/fragment_is_it_fresh" >
+        <action
+            android:id="@+id/action_isItFreshFragment_to_itemDetailsFragment"
+            app:destination="@id/navigation_item_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_freshness_dashboard"
+        android:name="com.example.freshnesstracker.FreshnessDashboardFragment"
+        android:label="Freshness Dashboard"
+        tools:layout="@layout/fragment_freshness_dashboard" >
+        <action
+            android:id="@+id/action_freshnessDashboardFragment_to_itemDetailsFragment"
+            app:destination="@id/navigation_item_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_quick_entry"
+        android:name="com.example.freshnesstracker.QuickEntryFragment"
+        android:label="Quick Entry"
+        tools:layout="@layout/fragment_quick_entry" />
+
+    <fragment
+        android:id="@+id/navigation_item_details"
+        android:name="com.example.freshnesstracker.ItemDetailsFragment"
+        android:label="Item Details"
+        tools:layout="@layout/fragment_item_details" >
+        <argument
+            android:name="foodItemId"
+            app:argType="integer" />
+    </fragment>
+</navigation>

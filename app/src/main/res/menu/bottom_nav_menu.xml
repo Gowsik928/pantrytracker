@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_waste_insights"
+        android:icon="@drawable/ic_waste_insights"
+        android:title="Insights" />
+    <item
+        android:id="@+id/navigation_is_it_fresh"
+        android:icon="@drawable/ic_is_it_fresh"
+        android:title="Is It Fresh?" />
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
+    <item
+        android:id="@+id/navigation_freshness_dashboard"
+        android:icon="@drawable/ic_dashboard"
+        android:title="Dashboard" />
+    <item
+        android:id="@+id/navigation_quick_entry"
+        android:icon="@drawable/ic_quick_entry"
+        android:title="Quick Entry" />
+</menu>
