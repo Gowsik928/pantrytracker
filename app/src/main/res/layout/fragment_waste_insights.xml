@@ -25,6 +25,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="120dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -67,7 +69,7 @@
                             android:layout_height="match_parent"
                             android:indeterminate="false"
                             android:max="100"
-                            android:progress="82"
+                            android:progress="0"
                             android:progressDrawable="@drawable/circular_progress_drawable" />
 
                         <TextView
@@ -75,17 +77,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="82%"
+                            android:text="0%"
                             android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
                             android:textColor="@color/primary_green"
                             android:textStyle="bold" />
                     </FrameLayout>
 
                     <TextView
+                        android:id="@+id/efficiency_score_message"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="Great job! You're saving more food."
+                        android:text="Add items to see your score"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
                         android:textColor="@color/text_primary" />
 
@@ -128,7 +131,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="$124.50"
+                            android:text="$0.00"
                             android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                             android:textColor="@color/primary_green"
                             android:textStyle="bold" />
@@ -164,7 +167,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="$12.80"
+                            android:text="$0.00"
                             android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                             android:textColor="@color/accent_red"
                             android:textStyle="bold" />
@@ -177,26 +180,65 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Monthly Analysis"
+                android:text="Waste Trend (Last 4 Weeks)"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textColor="@color/text_primary" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:layout_marginBottom="32dp"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="1dp"
                 app:strokeColor="@color/divider_color">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="Interactive Chart coming soon"
-                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                    android:textColor="@color/text_secondary" />
+                    android:layout_height="200dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal"
+                    android:padding="24dp"
+                    android:weightSum="4">
+
+                    <View
+                        android:id="@+id/bar_week_1"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_status_indicator"
+                        android:backgroundTint="@color/primary_green" />
+
+                    <View
+                        android:id="@+id/bar_week_2"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_status_indicator"
+                        android:backgroundTint="@color/accent_yellow" />
+
+                    <View
+                        android:id="@+id/bar_week_3"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_status_indicator"
+                        android:backgroundTint="@color/primary_green" />
+
+                    <View
+                        android:id="@+id/bar_week_4"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rounded_status_indicator"
+                        android:backgroundTint="@color/accent_red" />
+
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>

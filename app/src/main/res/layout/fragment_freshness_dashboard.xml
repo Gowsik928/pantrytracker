@@ -33,6 +33,47 @@
                     android:textColor="@color/text_primary"
                     android:textStyle="bold" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="16dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnStartService"
+                        style="@style/Widget.Material3.Button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Start Monitor"
+                        android:layout_marginEnd="8dp"
+                        app:cornerRadius="20dp"
+                        android:backgroundTint="@color/primary_green"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnStopService"
+                        style="@style/Widget.Material3.Button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stop Monitor"
+                        app:cornerRadius="20dp"
+                        android:backgroundTint="@color/primary_green"/>
+
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnNearbyShops"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Find Nearby Grocery Shops"
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/primary_green"
+                    app:icon="@drawable/ic_quick_entry"/>
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/alert_card"
                     android:layout_width="match_parent"

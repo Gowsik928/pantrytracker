@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_set_reminder"
+        android:title="Set Reminder" />
+    <item
+        android:id="@+id/action_clear_date"
+        android:title="Clear Date" />
+    <item
+        android:id="@+id/action_custom_days"
+        android:title="Custom Days" />
+</menu>

@@ -7,9 +7,10 @@ import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
+import android.os.HandlerThread
 import android.os.IBinder
-import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.google.android.gms.location.*
@@ -18,11 +19,15 @@ class LocationService : Service() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
+    private lateinit var handlerThread: HandlerThread
 
     override fun onCreate() {
         super.onCreate()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        
+
+        handlerThread = HandlerThread("LocationService")
+        handlerThread.start()
+
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 for (location in locationResult.locations) {
@@ -32,6 +37,7 @@ class LocationService : Service() {
             }
         }
         createNotificationChannel()
+        Toast.makeText(this, "Location service started", Toast.LENGTH_SHORT).show()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -44,7 +50,7 @@ class LocationService : Service() {
 
         startForeground(NOTIFICATION_ID, notification)
         startLocationUpdates()
-        
+
         return START_STICKY
     }
 
@@ -54,7 +60,7 @@ class LocationService : Service() {
             .build()
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, handlerThread.looper)
         }
     }
 
@@ -75,6 +81,11 @@ class LocationService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         fusedLocationClient.removeLocationUpdates(locationCallback)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            handlerThread.quitSafely()
+        } else {
+            handlerThread.quit()
+        }
     }
 
     companion object {
