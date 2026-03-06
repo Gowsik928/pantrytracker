@@ -5,7 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-data class FoodItem(val id: Int, val name: String, val expiryInfo: String, val statusColor: Int, val imageUrl: String)
+data class FoodItem(
+    val id: Int, 
+    val name: String, 
+    val expiryInfo: String, 
+    val statusColor: Int, 
+    val imageUrl: String,
+    val isUsed: Boolean = false
+)
 
 class FoodViewModel : ViewModel() {
 
@@ -24,18 +31,28 @@ class FoodViewModel : ViewModel() {
     fun addItem(name: String, expiryInDays: Int) {
         val currentList = _foodItems.value.orEmpty().toMutableList()
         val newId = (currentList.maxOfOrNull { it.id } ?: 0) + 1
-        val expiryInfo = "Expires in $expiryInDays days"
+        val expiryInfo = if (expiryInDays > 0) "Expires in $expiryInDays days" else "Expired"
         val statusColor = when {
             expiryInDays > 3 -> Color.GREEN
             expiryInDays > 0 -> Color.YELLOW
             else -> Color.RED
         }
-        currentList.add(FoodItem(newId, name, expiryInfo, statusColor, ""))
+        currentList.add(FoodItem(newId, name, expiryInfo, statusColor, "", false))
         _foodItems.value = currentList
     }
+
     fun useItem(item: FoodItem) {
         val currentList = _foodItems.value.orEmpty().toMutableList()
-        currentList.remove(item)
+        val index = currentList.indexOfFirst { it.id == item.id }
+        if (index != -1) {
+            currentList[index] = currentList[index].copy(isUsed = true)
+            _foodItems.value = currentList
+        }
+    }
+
+    fun deleteItem(item: FoodItem) {
+        val currentList = _foodItems.value.orEmpty().toMutableList()
+        currentList.removeIf { it.id == item.id }
         _foodItems.value = currentList
     }
 }
